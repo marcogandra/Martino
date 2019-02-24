@@ -1,0 +1,85 @@
+class vector2d:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __add__(self, other):
+        return vector2d(self.x + other.x, self.y + other.y)
+
+first = vector2d(5,7)
+second = vector2d(3,9)
+result = first + second
+print(result.x)
+print(result.y)
+
+
+'''
+# THIS USED ABOVE, WAS TO UNDERSTAND WHAT HAPPEN
+
+class vector2d:
+    def __init__(self, x, y):
+        self.wcx = x
+        self.wcy = y
+        print(self.wcx)
+        print(self.wcy)
+        print('------------------')
+
+    def __add__(self, other):
+        print('ooooooooooooooooooo')
+        return vector2d(self.wcx + other.wcx, self.wcy + other.wcy)
+
+first = vector2d(5,7)
+print('*******************')
+second = vector2d(3,9)
+print('¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨')
+print('===================')
+result = first + second
+print('===================')
+print(result.wcx)
+print(result.wcy)
+print(first.wcx)
+print(first.wcy)
+print(second.wcx)
+print(second.wcy)
+'''
+
+'''
+IF U ARE EXPERT AND READING THIS, PLEASE TELL IF IS WRONG OR RIGHT. I NEED A TEACHER!
+=======================
+Magic Methods - Add
+=======================
+start
+Line - Description
+9 - variable 'first' start class vector2d now as object 'first' with nothing inside
+2 - start function constructor __init__(first, 5, 7)
+3 - first.wcx = 5 # wcx = what call x
+4 - first.wcy = 7 # wcy = what call y
+9 - now, 'first' is a object with atributes 'x' and 'y' with values (5, 7)
+# after this, object 'first' and his atributes (5, 7) will be storage in memory
+10 - variable 'second' start class vector2d now as object 'second' whit nothing inside
+# in this cases, the variable just exist to give a 'name' for object after transform itself in it (variable turns itself in to object, like caterpillar and butterfly)
+# so, before was a caterpillar/variable with name 'first', now is a butterfly/object with two atributes.
+2 - start function constructor __init__(first, 3, 9)
+3 - second.wcx = 3
+4 - second.wcy = 9
+10 - now, 'second' is a object with atributes 'x' and 'y' with values (3, 9)
+# after this, object 'second' and his atributes (3, 9) will be storage in memory
+# NOTE NOW WE HAVE 2 OBJECTS IN MEMORY ('FIRST, SECOND') with atributes ((5,7), (3,9))
+11 - as 'first' and 'second', 'result' start as variable and turn in to object, with the sum of two objects.
+# result = first + second == result = (first__add__second)
+# its like: first = __add__(second) == __add__(first, second)
+# because, in case of line above, variable 'first' will be the 'self' atribute/arg on function __add__
+6 - __add__(first, second) # they already in memory
+7 - return (first.wcx == 5 + second.wcx == 7, first.wcy == 3 + second.wcy == 9) # they are allready in memory. they are just called. I'M NOT SURE ABOUT THAT.
+11 - 'result' is now a third object with the sum of another two objects 'first' and 'second', with the atributes (8, 16)
+# now we have 3 objects in memory with 2 atributes eatch one
+# we can print what atribute we want, but can't print the object itself, without one of his atributes.
+12 - just print what is already in memory. in this case 'result.x'
+13 - just print what is already in memory. in this case 'result.y'
+
+output:
+8
+16
+
+stop
+'''
