@@ -44,14 +44,12 @@ def novo_usu():
 	res = ''
 	while True:
 		res = str(input('Gostaria de guardar esse usuário e senha [S/N]? ')).upper().strip()[0]
-		print(res)
 		if res == 'N':
 			novo = login()
 		else:
 			if res == 'S':
 				usuario['Login'] = novo[0]
 				usuario['Senha'] = novo[1]
-				print(usuario)
 				registro()
 				break
 		
@@ -60,7 +58,9 @@ def login():
 	Define um nome para o usuário e uma senha
 	'''
 	nome = str(input('Digite o nome de um usuário: ')).strip()
-	senha = input('Digite uma senha: ')
+	if (nome == "") : nome = "Empty"
+	senha = input('Digite uma senha: ').strip()
+	if (senha == "") : senha = "Empty"
 	return nome, senha
 
 def abertura():
@@ -71,7 +71,6 @@ def abertura():
 	'''
 	with open('logs.txt', 'r') as leitura:
 		for index, words in enumerate(leitura):
-			print(index, words.split())
 			word = words.split()[0]
 			if index == 0:
 				usuario['Login'] = word
@@ -84,23 +83,16 @@ def conferencia(dado_sis, dado_conferir):
 	Puxa os dados e faz a conferência para saber se o login e a senha estão batendo.
 	Se bater tudo, retorna True. Caso contrário retorna False
 	'''
-	print(dado_conferir)
 	# Utilizano o método match para bater os dados de login e senha
 	m_login = re.match(dado_conferir[0], dado_sis['Login'])
-	if m_login:
-		print('Acertou login!')
-	else:
-		print('Errou login!')
 	m_senha = re.match(dado_conferir[1], dado_sis['Senha'])
-	if m_senha:
-		print('Acertou senha!')
-	else:
-		print('Errou senha!')
 	
+	#Confere se lo
 	if m_login and m_senha:
-		print('Tudo ok')
+		print('\nTudo ok! Sua para escrever está liberada.\n')
 		return True
 	else:
+		print("login e/ou senha incorreto(s)")
 		return False
 
 def bem_vindo():
@@ -133,12 +125,12 @@ def diario():
 		arquivo.readlines()
 	continuar = ' '
 	while True:
-		continuar = str(input('Quer continuar escrevendo [S/N]? ')).strip().upper()[0]
-		if continuar == 'S':
+		continuar = str(input('Quer continuar escrevendo [S/N]? ')).strip().upper()
+		if continuar == "" or continuar == "S":
 			break
 		else:
 			if continuar == 'N':
-				print('Obrigado por participar!')
+				print('\nObrigado por participar!\n')
 		return False
 
 
@@ -153,19 +145,15 @@ if tem_arquivo == False:
 if tem_arquivo == True:
 	# inicio do procedimento, chamando os dados que estão no arquivo
 	dados = abertura()
-	print(dados)
 	# Começa o loopig para a conferencia de login. Caso o login ou senha estejam incorretos, a função retorna.
 	while True:	
 		# chama a função login() para depois fazer conferencia com os dados gravados
 		conferir = login()
-		print(conferir)
 		# agora iremos bater os dados com o login
 		res_conf = conferencia(dados, conferir)
-		print(res_conf)
 		# se a conferência bater, inicia um novo procedimento.
 		if res_conf == True:
 			# chama a função de inicio do diario, com a funcao bem_vindo()
 			saudacao = bem_vindo()
-			print(saudacao)
 			if saudacao == False:
 				break
