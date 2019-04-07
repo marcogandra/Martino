@@ -6,8 +6,10 @@ import pandas as pd
 # Data frame com produtos existentes
 try:
 	df_arquivo = pd.read_csv('produtos_loja.csv')
+	tem_ar = True
 except:
 	print('\nArquivo vazio!\n')
+	tem_ar = False
 
 # Dicionário que vai guardar os produtos existentes
 produtos = {}
@@ -66,7 +68,7 @@ def nav():
 def cadastrar():
 	'''
 	Função responsável por cadastrar produtos.
-	Pede que seja digitado nome e valor e então guarda em 'produtos'
+	Pede que seja digitado nome e valor e então guarda em 'produtos'.
 	'''
 	while True:
 		try:
@@ -104,7 +106,7 @@ def cadastrar():
 
 def listar():
 	'''
-	Lista os produtos a serem mostrados, quando necessário
+	Lista os produtos a cadastrados na memória ativa.
 	'''
 	print(f'{"Index":<8} {"Produto ":<9}{"":-<20} {"Preço"} {"Quantidade":>12}')
 	index = 0
@@ -114,7 +116,7 @@ def listar():
 
 def buscar():
 	'''
-	Função que busca um produto em 'produtos'. Basicamente essa função retorna o valor do produto buscado.
+	Função que busca um produto em 'produtos'. Basicamente essa função retorna o valor e quantidade do produto buscado.
 	'''
 	listar()
 	while True:
@@ -135,7 +137,6 @@ def buscar():
 def editar():
 	'''
 	Função responsável por editar algo que está na memória ativa do programa.
-	O que está guardado ainda não está incluso nessa versão.
 	'''
 	listar()
 	index = 0
@@ -180,7 +181,7 @@ def editar():
 
 def vender():
 	'''
-	Função em construção.
+	Módulo de venda. Elimina uma unidade em relação ao produto digitado pelo usuário.
 	'''
 	listar()
 	while True:
@@ -239,6 +240,7 @@ def menu(esc):
 # INÍCIO DO PROGRAMA
 #total_venda = soma_vendas()
 bem_vindo()
-resgate()
+if tem_ar:
+	resgate()
 nav()
 b_menu()
